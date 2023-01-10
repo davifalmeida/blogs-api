@@ -23,16 +23,16 @@
     "colId": "history",
     "containerId": "",
     "name": "localhost:3000/login",
-    "url": "localhost:3000/login",
+    "url": "localhost:3000/user",
     "method": "POST",
     "sortNum": 0,
     "created": "2023-01-04T19:57:51.100Z",
-    "modified": "2023-01-05T16:13:56.606Z",
+    "modified": "2023-01-10T19:58:22.741Z",
     "headers": [],
     "params": [],
     "body": {
       "type": "json",
-      "raw": "{\n  \"email\": \"lewishamilton@gmail.com\",\n  \"password\": \"123456\"\n}",
+      "raw": "{\n  \"displayName\": \"davi ferreira\",\n  \"email\": \"davigh@email.com\",\n  \"password\": \"123456\",\n  \"image\": \"http://4.bp.blogspot.com/_YA50adQ-7vQ/S1gfR_6ufpI/AAAAAAAAAAk/1ErJGgRWZDg/S45/brett.png\"\n\n}",
       "form": []
     },
     "tests": []
