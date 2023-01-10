@@ -11,4 +11,6 @@ categoryMiddleware.validateName,
  loginMiddleware.validateTokenLogin,
   categoryController.createCategories);
 
+router.get('/', loginMiddleware.validateTokenLogin, categoryController.getAllCategories);
+
 module.exports = router;
