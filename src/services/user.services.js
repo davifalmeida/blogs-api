@@ -9,6 +9,19 @@ const createUser = async (user) => {
   return User.create(user);
 };
 
+const getAllUsers = async () => {
+    const users = await User.findAll();
+    // users.forEach((user) => delete user.dataValues.password);
+    // return users;
+    const usersWithoutPassword = users.map((user) => {
+        const { password, ...userWithoutPassword } = user.dataValues;
+        return userWithoutPassword;
+      });
+    
+      return usersWithoutPassword;
+};
+
 module.exports = {
     createUser,
+    getAllUsers,
 };
