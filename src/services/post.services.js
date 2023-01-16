@@ -35,8 +35,26 @@ const verifyIfAllCategoriesExist = async (categoryIds) => {
     return allPosts;
   };
 
+  const getPostById = async (id) => {
+    try {
+    const post = await BlogPost.findByPk(id, {
+    include: [
+    { model: User, as: 'user', attributes: { exclude: ['password'] } },
+    { model: Category, as: 'categories', through: { attributes: [] } },
+    ],
+    });
+    if (!post) {
+    throw new Error('Post does not exist');
+    }
+    return post;
+    } catch (error) {
+    return { message: error.message };
+    }
+    };
+    
   module.exports = {
      createPost,
     verifyIfAllCategoriesExist,
     getAllPosts,
+    getPostById,
     };

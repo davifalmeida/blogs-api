@@ -20,7 +20,20 @@ const create = async (req, res, next) => {
         if (posts.message) return res.status(404).json(posts);
         return res.status(200).json(posts);
     };
+
+const getPostById = async (req, res, next) => {
+    try {
+        const { id } = req.params;
+        const post = await postService.getPostById(id);
+        if (post.message) return res.status(404).json(post);
+        return res.status(200).json(post);
+    } catch (error) {
+        next(error);
+    }
+};
+
 module.exports = {
     create,
     getAll,
+    getPostById,
 };

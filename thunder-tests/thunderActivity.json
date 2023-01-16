@@ -23,11 +23,11 @@
     "colId": "history",
     "containerId": "",
     "name": "localhost:3000/login",
-    "url": "localhost:3000/categories",
-    "method": "GET",
+    "url": "localhost:3000/post",
+    "method": "POST",
     "sortNum": 0,
     "created": "2023-01-04T19:57:51.100Z",
-    "modified": "2023-01-10T23:29:31.058Z",
+    "modified": "2023-01-13T18:01:48.412Z",
     "headers": [
       {
         "name": "Authorization",
@@ -42,7 +42,7 @@
     "params": [],
     "body": {
       "type": "json",
-      "raw": "[\n  {\n      \"id\": 1,\n      \"name\": \"Inovação\"\n  },\n  {\n      \"id\": 2,\n      \"name\": \"Escola\"\n  }\n]",
+      "raw": "{\n  \"title\": \"Latest updates, August 1st\",\n  \"content\": \"The whole text for the blog post goes here in this key\",\n  \"categoryIds\": [1, 2]\n}",
       "form": []
     },
     "tests": []
