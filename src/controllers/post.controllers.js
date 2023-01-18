@@ -46,7 +46,7 @@ const update = async (req, res, next) => {
         const { id } = req.params;
         const { title, content } = req.body;
         const { userId } = req.user;
-        const updatedPost = await postService.updatePost({ id, title, content, userId });
+      const updatedPost = await postService.updatePost(id, title, content, userId);
         return res.status(200).json(updatedPost);
     } catch (error) {
         if (error.message === 'Post does not exist') {

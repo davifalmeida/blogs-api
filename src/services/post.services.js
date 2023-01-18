@@ -88,25 +88,36 @@ const verifyIfAllCategoriesExist = async (categoryIds) => {
     }
     };
 
-  const updatePost = async ({ title, content, userId, id }) => {
-    const post = await BlogPost.findOne({
-        where: { id },
-        include: [
-            { model: User, as: 'user', attributes: { exclude: ['password'] } },
-        ],
-    });
-    if (!post) {
-      const newError = new Error('Post does not exist');
-      newError.status = 404;
-      throw newError;
-    }
-    if (post.user.id !== userId) {
-        const newError = new Error('Unauthorized user');
-        newError.status = 401;
-        throw newError;
-    }
-    await BlogPost.update({ title, content }, { where: { id } });
-    return BlogPost.findOne({ where: { id } });
+//   const updatePost = async ({ id, title, content, categoryIds, userId }) => {
+//     const post = await BlogPost.findOne({
+//         where: { id },
+//         include: [
+//             { model: User, as: 'user', attributes: { exclude: ['password'] } },
+//         ],
+//     });
+//     if (!post) {
+//        const newError = new Error('Post does not exist');
+//       newError.status = 404;
+//       throw newError;
+//     }
+//     if (post.user.id !== userId) {
+//         const newError = new Error('Unauthorized user');
+//         newError.status = 401;
+//         throw newError;
+//     }
+//     await BlogPost.update({ title, content, categoryIds }, { where: { id } });
+//     return BlogPost.findOne({ where: { id } });
+// };
+
+const updatePost = async (id, title, content, userId) => {
+const post = await getPostById(id);
+if (post.user.id !== userId) {
+    const newError = new Error('Unauthorized user');
+    newError.status = 401;
+    throw newError;
+}
+await BlogPost.update({ title, content }, { where: { id } });
+return getPostById(id);
 };
 
 const deletePost = async (id, userId) => {
@@ -114,6 +125,7 @@ const deletePost = async (id, userId) => {
         where: { id },
         include: [
             { model: User, as: 'user', attributes: { exclude: ['password'] } },
+            
         ],
     });
     if (!post) {
