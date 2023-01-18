@@ -24,7 +24,7 @@ module.exports = async (request, response) => {
       expiresIn: '1d',
       algorithm: 'HS256',
     };
-  const token = jwt.sign({ data: { userId: user.id } }, secret, jwtConfig);
+  const token = jwt.sign({ userId: user.id }, secret, jwtConfig);
 
     response.status(200).json({ token });
   } catch (err) {

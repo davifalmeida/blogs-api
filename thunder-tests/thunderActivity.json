@@ -23,26 +23,21 @@
     "colId": "history",
     "containerId": "",
     "name": "localhost:3000/login",
-    "url": "localhost:3000/post",
-    "method": "POST",
+    "url": "localhost:3000/post/:id",
+    "method": "PUT",
     "sortNum": 0,
     "created": "2023-01-04T19:57:51.100Z",
-    "modified": "2023-01-13T18:01:48.412Z",
+    "modified": "2023-01-18T12:47:21.669Z",
     "headers": [
       {
         "name": "Authorization",
         "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImlkIjo0LCJkaXNwbGF5TmFtZSI6ImRhdmkgZmVycmVpcmEiLCJlbWFpbCI6ImRhdmk0Z2hAZW1haWwuY29tIiwiaW1hZ2UiOiJodHRwOi8vNC5icC5ibG9nc3BvdC5jb20vX1lBNTBhZFEtN3ZRL1MxZ2ZSXzZ1ZnBJL0FBQUFBQUFBQUFrLzFFckpHZ1JXWkRnL1M0NS9icmV0dC5wbmcifSwiaWF0IjoxNjczMzgyNjEzLCJleHAiOjE2NzM5ODc0MTN9.FIIi9q8fXY4o4pYnMvHZtfaqKF372hFC2iUnNA3w-D4"
-      },
-      {
-        "name": "Accept",
-        "value": "*/*",
-        "isDisabled": true
       }
     ],
     "params": [],
     "body": {
       "type": "json",
-      "raw": "{\n  \"title\": \"Latest updates, August 1st\",\n  \"content\": \"The whole text for the blog post goes here in this key\",\n  \"categoryIds\": [1, 2]\n}",
+      "raw": "{\n  \"title\": \"Latest updates, August 1st\",\n  \"content\": \"The whole text for the blog post goes here in this key\"\n}",
       "form": []
     },
     "tests": []
@@ -148,15 +143,15 @@
     "containerId": "",
     "name": "localhost:3000/login",
     "url": "localhost:3000/login",
-    "method": "GET",
+    "method": "POST",
     "sortNum": 0,
     "created": "2023-01-04T20:00:31.192Z",
-    "modified": "2023-01-05T16:12:08.389Z",
+    "modified": "2023-01-16T21:14:16.291Z",
     "headers": [],
     "params": [],
     "body": {
       "type": "json",
-      "raw": "{\n  \"email\": \"MichaelSchumacher@gmail.com\",\n  \"password\": \"123456\"\n}",
+      "raw": "{\n  \"email\": \"michaelSchumacher@gmail.com\",\n  \"password\": \"123456\"\n}",
       "form": []
     },
     "tests": []

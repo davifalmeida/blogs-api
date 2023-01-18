@@ -6,12 +6,16 @@ const { postController } = require('../controllers');
 const { postMiddleware } = require('../middlewares');
 const { loginMiddleware } = require('../middlewares');
 
+router.get('/', loginMiddleware.validateTokenLogin, postController.getAll);
+router.get('/:id', loginMiddleware.validateTokenLogin, postController.getPostById);
+
 router.post('/', loginMiddleware.validateTokenLogin,
     postMiddleware.checkValidBlogPost,
   postController.create);
 
-router.get('/', loginMiddleware.validateTokenLogin, postController.getAll);
+router.put('/:id', loginMiddleware.validateTokenLogin,
+    postMiddleware.validatePostUpdate,
+ postController.update);
 
-router.get('/:id', loginMiddleware.validateTokenLogin, postController.getPostById);
-
+router.delete('/:id', loginMiddleware.validateTokenLogin, postController.deletePost);
 module.exports = router;

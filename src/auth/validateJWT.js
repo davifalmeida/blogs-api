@@ -7,8 +7,8 @@ const jwtConfig = {
   expiresIn: '1d',
 };
 
-const createToken = async (noPassword) => {
-  const token = jwt.sign({ data: noPassword }, secret, jwtConfig);
+const createToken = async (userId) => {
+  const token = jwt.sign({ userId }, secret, jwtConfig);
   return token;
 };
 

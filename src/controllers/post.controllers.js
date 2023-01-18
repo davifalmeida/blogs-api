@@ -3,9 +3,10 @@ const { postService } = require('../services');
 
 const create = async (req, res, next) => {
     try {
-      const { title, content, categoryIds, userId } = req.body;
-      const post = await postService.createPost({ title, content, categoryIds, userId });
-      res.status(201).json({ post });
+      const { title, content, categoryIds } = req.body;
+      const { userId } = req.user;
+      const post = await postService.createPost(title, content, categoryIds, userId);
+      res.status(201).json(post);
     } catch (error) {
         if (error.message === 'one or more "categoryIds" not found') {
           res.status(400).json({ message: error.message });
@@ -32,8 +33,53 @@ const getPostById = async (req, res, next) => {
     }
 };
 
+// const update = async (req, res) => {
+//     const { id } = req.params;
+//     const { title, content } = req.body;
+//     const { id: userId } = req.user;
+//     const updatedPost = await postService.updatePost({ id, title, content, userId });
+//     return res.status(200).json(updatedPost);
+//   };
+
+const update = async (req, res, next) => {
+    try {
+        const { id } = req.params;
+        const { title, content } = req.body;
+        const { userId } = req.user;
+        const updatedPost = await postService.updatePost({ id, title, content, userId });
+        return res.status(200).json(updatedPost);
+    } catch (error) {
+        if (error.message === 'Post does not exist') {
+            res.status(404).json({ message: error.message });
+        } else if (error.message === 'Unauthorized user') {
+            res.status(401).json({ message: error.message });
+        } else {
+            next(error);
+        }
+    }
+};
+
+const deletePost = async (req, res, next) => {
+    try {
+        const { id } = req.params;
+        const { userId } = req.user;
+        await postService.deletePost(id, userId);
+        return res.status(204).end();   
+    } catch (error) {
+        if (error.message === 'Post does not exist') {
+            res.status(404).json({ message: error.message });
+        } else if (error.message === 'Unauthorized user') {
+            res.status(401).json({ message: error.message });
+        } else {
+            next(error);
+        }
+    }
+};
+
 module.exports = {
     create,
     getAll,
     getPostById,
+    update,
+    deletePost,
 };
