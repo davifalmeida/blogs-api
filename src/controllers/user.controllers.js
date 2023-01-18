@@ -36,9 +36,9 @@ const getUser = async (req, res) => {
 };
 
 const deleteUser = async (req, res) => {
-  const { id } = req.user;
+  const { userId } = req.user;
 
-  await userService.deleteUser(id);
+  await userService.deleteUser(userId);
 
   return res.status(204).end();
 };

@@ -1,4 +1,3 @@
-// const { postMiddleware } = require('../middlewares');
 const { postService } = require('../services');
 
 const create = async (req, res, next) => {
@@ -32,14 +31,6 @@ const getPostById = async (req, res, next) => {
         next(error);
     }
 };
-
-// const update = async (req, res) => {
-//     const { id } = req.params;
-//     const { title, content } = req.body;
-//     const { id: userId } = req.user;
-//     const updatedPost = await postService.updatePost({ id, title, content, userId });
-//     return res.status(200).json(updatedPost);
-//   };
 
 const update = async (req, res, next) => {
     try {
