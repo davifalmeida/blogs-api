@@ -1,4 +1,4 @@
-// const { Op } = require('sequelize');
+const { Op } = require('sequelize');
 
 const { Category, BlogPost, User } = require('../models');
 
@@ -88,27 +88,6 @@ const verifyIfAllCategoriesExist = async (categoryIds) => {
     }
     };
 
-//   const updatePost = async ({ id, title, content, categoryIds, userId }) => {
-//     const post = await BlogPost.findOne({
-//         where: { id },
-//         include: [
-//             { model: User, as: 'user', attributes: { exclude: ['password'] } },
-//         ],
-//     });
-//     if (!post) {
-//        const newError = new Error('Post does not exist');
-//       newError.status = 404;
-//       throw newError;
-//     }
-//     if (post.user.id !== userId) {
-//         const newError = new Error('Unauthorized user');
-//         newError.status = 401;
-//         throw newError;
-//     }
-//     await BlogPost.update({ title, content, categoryIds }, { where: { id } });
-//     return BlogPost.findOne({ where: { id } });
-// };
-
 const updatePost = async (id, title, content, userId) => {
 const post = await getPostById(id);
 if (post.user.id !== userId) {
@@ -142,6 +121,23 @@ const deletePost = async (id, userId) => {
     return { message: 'Post deleted successfully' };
 };
 
+const search = async (query) => {
+  const posts = await BlogPost.findAll({
+    where: {
+      [Op.or]: [
+        { title: { [Op.like]: `%${query}%` } },
+        { content: { [Op.like]: `%${query}%` } },
+      ],
+    },
+    include: [
+      { model: User, as: 'user', attributes: { exclude: ['password'] } },
+      { model: Category, as: 'categories', through: { attributes: [] } },
+    ],
+  });
+
+  return posts;
+};
+
   module.exports = {
      createPost,
     verifyIfAllCategoriesExist,
@@ -149,4 +145,5 @@ const deletePost = async (id, userId) => {
     getPostById,
     updatePost,
     deletePost,
+    search,
     };
